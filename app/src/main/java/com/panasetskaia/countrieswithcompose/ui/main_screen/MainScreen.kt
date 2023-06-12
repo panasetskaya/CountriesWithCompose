@@ -44,8 +44,8 @@ fun MainScreen(viewModelFactory: ViewModelProvider.Factory) {
                         icon = {
                             Icon(painterResource(id = item.iconId), contentDescription = null)
                         },
-                        selectedContentColor = MaterialTheme.colors.secondary,
-                        unselectedContentColor = MaterialTheme.colors.background
+                        selectedContentColor = MaterialTheme.colors.background,
+                        unselectedContentColor = MaterialTheme.colors.secondary
                     )
                 }
 
