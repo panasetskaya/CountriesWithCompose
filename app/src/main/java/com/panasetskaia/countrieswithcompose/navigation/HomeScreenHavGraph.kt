@@ -14,10 +14,10 @@ fun NavGraphBuilder.homeScreenNavGraph(
         route = Screen.Home.route
     ) {
         composable(Screen.AllCountries.route) {
-            allCountriesScreenContent
+            allCountriesScreenContent()
         }
         composable(Screen.SingleCountry.route) {
-            singleCountryScreenContent
+            singleCountryScreenContent()
         }
     }
 }

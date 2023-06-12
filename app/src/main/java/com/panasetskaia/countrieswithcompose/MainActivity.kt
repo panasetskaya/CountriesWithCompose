@@ -3,11 +3,7 @@ package com.panasetskaia.countrieswithcompose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
+import com.panasetskaia.countrieswithcompose.ui.main_screen.MainScreen
 import com.panasetskaia.countrieswithcompose.ui.theme.CountriesWithComposeTheme
 
 class MainActivity : ComponentActivity() {
@@ -15,17 +11,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             CountriesWithComposeTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize()
-                ) {
-                    Greeting("Android")
-                }
+                MainScreen()
             }
         }
     }
-}
-
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
 }
