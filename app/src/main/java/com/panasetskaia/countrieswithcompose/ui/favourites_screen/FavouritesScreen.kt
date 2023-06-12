@@ -6,9 +6,14 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
-fun FavouritesScreen() {
+fun FavouritesScreen(
+    viewModelFactory: ViewModelProvider.Factory,
+    viewModel: FavouritesViewModel = viewModel(factory = viewModelFactory),
+) {
     Text(
         text = "Favourites",
         modifier = androidx.compose.ui.Modifier

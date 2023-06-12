@@ -12,6 +12,7 @@ import com.panasetskaia.countrieswithcompose.domain.Country
 
 @Composable
 fun SingleCountryScreen(
+    viewModel: HomeScreenViewModel,
     onBackPressed: () -> Unit
 ) {
 
