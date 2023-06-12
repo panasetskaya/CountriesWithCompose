@@ -3,6 +3,7 @@ package com.panasetskaia.countrieswithcompose.ui.main_screen
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -38,7 +39,7 @@ fun MainScreen() {
                             }
                         },
                         icon = {
-                            Icon(item.icon, contentDescription = null)
+                            Icon(painterResource(id = item.iconId), contentDescription = null)
                         },
 //                        label = {
 //                            Text(text = stringResource(id = item.titleResId))
