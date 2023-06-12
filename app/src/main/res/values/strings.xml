@@ -2,4 +2,8 @@
     <string name="app_name">Countries With Compose</string>
     <string name="navigation_item_main">Home</string>
     <string name="navigation_item_favourite">Favourites</string>
+
+    //error msg
+    <string name="offline_error">You are offline</string>
+    <string name="network_error">Network error</string>
 </resources>

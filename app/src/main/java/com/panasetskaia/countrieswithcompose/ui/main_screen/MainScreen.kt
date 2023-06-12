@@ -11,7 +11,7 @@ import com.panasetskaia.countrieswithcompose.navigation.rememberNavigationState
 import com.panasetskaia.countrieswithcompose.ui.favourites_screen.FavouritesScreen
 import com.panasetskaia.countrieswithcompose.ui.home_screen.SingleCountryScreen
 import com.panasetskaia.countrieswithcompose.ui.home_screen.all_countries_screen.AllCountriesScreen
-import com.panasetskaia.countrieswithcompose.ui.theme.NavigationItem
+import com.panasetskaia.countrieswithcompose.navigation.NavigationItem
 
 @Composable
 fun MainScreen() {

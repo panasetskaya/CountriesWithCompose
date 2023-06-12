@@ -1,7 +1,6 @@
-package com.panasetskaia.countrieswithcompose.ui.theme
+package com.panasetskaia.countrieswithcompose.navigation
 
 import com.panasetskaia.countrieswithcompose.R
-import com.panasetskaia.countrieswithcompose.navigation.Screen
 
 sealed class NavigationItem(
     val screen: Screen,
