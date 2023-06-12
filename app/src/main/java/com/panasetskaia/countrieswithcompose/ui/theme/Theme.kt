@@ -46,11 +46,11 @@ fun CountriesWithComposeTheme(
     } else {
         LightColorPalette
     }
+
     val systemUiController = rememberSystemUiController()
-    val statusBarColor = colors.primary
     SideEffect {
         systemUiController.setSystemBarsColor(
-            color = statusBarColor,
+            color = colors.primary,
             darkIcons = false
         )
     }
