@@ -24,7 +24,7 @@ private val LightColorPalette = lightColors(
     secondary = DarkBlue,
     onPrimary = Color.White,
     onSecondary = Color.White,
-    surface = BackgroundGray
+    background = BackgroundGray
 
     /* Other default colors to override
     background = Color.White,
