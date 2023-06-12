@@ -4,14 +4,13 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.panasetskaia.countrieswithcompose.navigation.AppNavGraph
 import com.panasetskaia.countrieswithcompose.navigation.rememberNavigationState
-import com.panasetskaia.countrieswithcompose.ui.home_screen.all_countries_screen.AllCountriesScreen
 import com.panasetskaia.countrieswithcompose.ui.favourites_screen.FavouritesScreen
 import com.panasetskaia.countrieswithcompose.ui.home_screen.SingleCountryScreen
+import com.panasetskaia.countrieswithcompose.ui.home_screen.all_countries_screen.AllCountriesScreen
 import com.panasetskaia.countrieswithcompose.ui.theme.NavigationItem
 
 @Composable
@@ -41,9 +40,6 @@ fun MainScreen() {
                         icon = {
                             Icon(painterResource(id = item.iconId), contentDescription = null)
                         },
-//                        label = {
-//                            Text(text = stringResource(id = item.titleResId))
-//                        },
                         selectedContentColor = MaterialTheme.colors.secondary,
                         unselectedContentColor = MaterialTheme.colors.background
                     )
