@@ -32,8 +32,8 @@ fun AllCountriesScreen(
 
     LazyColumn(
         modifier = Modifier.padding(paddingValues),
-        contentPadding = PaddingValues(8.dp, 16.dp, 8.dp, 64.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        contentPadding = PaddingValues(8.dp, 8.dp, 8.dp, 8.dp),
+        verticalArrangement = Arrangement.spacedBy(4.dp)
     ) {
 
         items(
