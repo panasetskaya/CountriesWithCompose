@@ -1,17 +1,21 @@
 package com.panasetskaia.countrieswithcompose.domain
 
-data class NetworkResult<out T>(val status: Status, val data: T?, val msg: String?) {
+data class NetworkResult(val status: Status, val msg: String?) {
 
     companion object {
-        fun <T> success(data: T): NetworkResult<T> {
-            return NetworkResult(Status.SUCCESS, data, null)
+        fun loading(): NetworkResult {
+            return NetworkResult(Status.LOADING,  null)
         }
-        fun <T> error(data: T?, msg: String?): NetworkResult<T> {
-            return NetworkResult(Status.ERROR, data, msg)
+        fun success(): NetworkResult {
+            return NetworkResult(Status.SUCCESS,  null)
+        }
+        fun error(msg: String?): NetworkResult {
+            return NetworkResult(Status.ERROR, msg)
         }
     }
 }
 enum class Status {
     SUCCESS,
-    ERROR
+    ERROR,
+    LOADING
 }

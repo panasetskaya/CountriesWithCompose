@@ -14,5 +14,6 @@ data class CountryDBModel(
     val languages: List<String>,
     val capital: String?,
     val population: Int?,
-    val flagUrl: String?
+    val flagUrl: String?,
+    val isFavourite: Boolean = false
 )

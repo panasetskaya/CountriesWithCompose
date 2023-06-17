@@ -22,8 +22,6 @@ fun AllCountriesScreen(
     paddingValues: PaddingValues,
     onCountryClickListener: (Country) -> Unit
 ) {
-    //todo: remove that dummy for viewModel list
-
     val lifecycleOwner = LocalLifecycleOwner.current
     val countriesFlow = remember(viewModel.countriesFlow, lifecycleOwner) {
         viewModel.countriesFlow.flowWithLifecycle(lifecycleOwner.lifecycle, Lifecycle.State.STARTED)
@@ -41,7 +39,7 @@ fun AllCountriesScreen(
             key = { country: Country ->
                 country.commonName
             }) { country: Country ->
-            CountryCard(country, {}) {
+            CountryCard(country, {viewModel.changeFavouriteStatus(country)}) {
                 onCountryClickListener(country)
             }
         }

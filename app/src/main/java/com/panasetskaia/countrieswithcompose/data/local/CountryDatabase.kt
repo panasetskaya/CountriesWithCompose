@@ -1,14 +1,13 @@
 package com.panasetskaia.countrieswithcompose.data.local
 
 import android.content.Context
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
-import androidx.room.TypeConverters
+import androidx.room.*
 
-@Database(entities = [CountryDBModel::class], version = 1, exportSchema = true)
+@Database(
+    entities = [CountryDBModel::class], version = 1, exportSchema = true
+)
 @TypeConverters(CountryConverters::class)
-abstract class CountryDatabase: RoomDatabase() {
+abstract class CountryDatabase : RoomDatabase() {
     companion object {
 
         private var db: CountryDatabase? = null

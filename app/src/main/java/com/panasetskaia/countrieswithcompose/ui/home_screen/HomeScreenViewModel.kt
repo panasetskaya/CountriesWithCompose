@@ -1,17 +1,19 @@
 package com.panasetskaia.countrieswithcompose.ui.home_screen
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.panasetskaia.countrieswithcompose.domain.Country
-import com.panasetskaia.countrieswithcompose.domain.LoadAllCountriesUseCase
-import com.panasetskaia.countrieswithcompose.domain.Status
+import com.panasetskaia.countrieswithcompose.domain.*
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class HomeScreenViewModel @Inject constructor(private val loadAllCountriesUseCase: LoadAllCountriesUseCase): ViewModel() {
+class HomeScreenViewModel @Inject constructor(
+    private val loadAllCountriesUseCase: LoadAllCountriesUseCase,
+    private val changeFavouriteStatusUseCase: ChangeFavouriteStatusUseCase,
+    val getErrorStatusUseCase: GetErrorStatusUseCase
+
+) : ViewModel() {
 
     private val _countriesFlow =
         MutableSharedFlow<List<Country>>(
@@ -20,20 +22,24 @@ class HomeScreenViewModel @Inject constructor(private val loadAllCountriesUseCas
         )
     val countriesFlow: SharedFlow<List<Country>> = _countriesFlow
 
+    private val _errorStatusFlow = MutableStateFlow(NetworkResult.loading())
+    val errorStatusFlow: StateFlow<NetworkResult> = _errorStatusFlow
+
+
     init {
         viewModelScope.launch {
-            val networkResult = loadAllCountriesUseCase()
-            when (networkResult.status) {
-                Status.SUCCESS -> {
-                    networkResult.data?.let {
-                        Log.d("MYLOG", it.toString())
-                        _countriesFlow.tryEmit(it) }
-                }
-                Status.ERROR -> {
-
-                }
+//            _errorStatusFlow.emitAll(getErrorStatusUseCase())
+            loadAllCountriesUseCase().collect {
+                _countriesFlow.emit(it)
             }
         }
+    }
+
+    fun changeFavouriteStatus(country: Country) {
+        viewModelScope.launch {
+            changeFavouriteStatusUseCase(country.commonName)
+        }
+
     }
 
 }
