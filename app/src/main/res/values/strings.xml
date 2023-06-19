@@ -8,4 +8,5 @@
     <string name="network_error">Network error</string>
     <string name="country_flag_desc">country flag description</string>
     <string name="add_to_favourite">Add to favourites</string>
+    <string name="smth_wrong">Something is wrong</string>
 </resources>

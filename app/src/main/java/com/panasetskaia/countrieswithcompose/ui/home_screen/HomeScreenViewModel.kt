@@ -22,17 +22,22 @@ class HomeScreenViewModel @Inject constructor(
         )
     val countriesFlow: SharedFlow<List<Country>> = _countriesFlow
 
-    private val _errorStatusFlow = MutableStateFlow(NetworkResult.loading())
-    val errorStatusFlow: StateFlow<NetworkResult> = _errorStatusFlow
+    private val _loadingStatusFlow = MutableStateFlow(NetworkResult.loading())
+    val loadingStatusFlow: StateFlow<NetworkResult> = _loadingStatusFlow
 
 
     init {
         viewModelScope.launch {
-//            _errorStatusFlow.emitAll(getErrorStatusUseCase())
+            getErrorStatusUseCase().collect {
+                _loadingStatusFlow.emit(it)
+            }
+        }
+        viewModelScope.launch {
             loadAllCountriesUseCase().collect {
                 _countriesFlow.emit(it)
             }
         }
+
     }
 
     fun changeFavouriteStatus(country: Country) {

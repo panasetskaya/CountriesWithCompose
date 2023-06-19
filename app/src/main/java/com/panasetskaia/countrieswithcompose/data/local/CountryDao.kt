@@ -18,4 +18,7 @@ interface CountryDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCountry(countryDBModel: CountryDBModel)
 
+    @Query("SELECT * FROM countrydbmodel WHERE isFavourite")
+    fun getAllFavourites(): Flow<List<CountryDBModel>>
+
 }

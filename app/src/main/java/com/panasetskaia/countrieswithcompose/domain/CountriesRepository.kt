@@ -10,6 +10,8 @@ interface CountriesRepository {
 
     suspend fun changeFavouriteStatus(commonName: String)
 
+    suspend fun getAllFavourites(): Flow<List<Country>>
+
     val errorStatus: Flow<NetworkResult>
 
 }

@@ -54,6 +54,14 @@ class CountriesRepositoryImpl @Inject constructor(
             .flowOn(Dispatchers.IO)
     }
 
+    private fun getFavouritesFromDB(): Flow<List<Country>> {
+        return dao.getAllFavourites()
+            .map {
+                mapper.mapDBModelListToEntityList(it)
+            }
+            .flowOn(Dispatchers.IO)
+    }
+
     private fun createErrorResult(e: Exception): NetworkResult {
         val msg = if (e is UnknownHostException) {
             countriesResourceManager.returnOfflineErrorString()
@@ -73,5 +81,9 @@ class CountriesRepositoryImpl @Inject constructor(
             val newCountry = it.copy(isFavourite = !it.isFavourite)
             dao.insertCountry(newCountry)
         }
+    }
+
+    override suspend fun getAllFavourites(): Flow<List<Country>> {
+        return getFavouritesFromDB()
     }
 }
