@@ -10,6 +10,15 @@ import javax.inject.Inject
 
 class CountryMapper @Inject constructor() {
 
+    fun mapDBModelListToEntityList(dbModelList: List<CountryDBModel>): List<Country> {
+        val newList: MutableList<Country> = mutableListOf()
+        for (i in dbModelList) {
+            val entity = mapDBModelToDomainEntity(i)
+            newList.add(entity)
+        }
+        return newList
+    }
+
     fun mapDtoToDBModel(dtoModel: CountryDto): CountryDBModel? {
         val languages = parseLanguages(dtoModel)
         val nameContainer = dtoModel.name
@@ -38,7 +47,8 @@ class CountryMapper @Inject constructor() {
             dbModel.languages,
             dbModel.capital,
             dbModel.population,
-            dbModel.flagUrl
+            dbModel.flagUrl,
+            dbModel.isFavourite
         )
     }
 
