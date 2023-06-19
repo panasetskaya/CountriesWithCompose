@@ -8,5 +8,6 @@ data class Country(
     val capital: String?,
     val population: Int?,
     val flagUrl: String?,
-    val isFavourite: Boolean = false
+    val isFavourite: Boolean = false,
+    var isSelected: Boolean = false
     )
