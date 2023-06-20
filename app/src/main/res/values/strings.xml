@@ -11,4 +11,5 @@
     <string name="smth_wrong">Something is wrong</string>
     <string name="selection_option">Selection option</string>
     <string name="deleteFromFav">Delete from favourites</string>
+    <string name="deleted">Removed from favourites</string>
 </resources>

@@ -11,6 +11,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -22,6 +23,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.panasetskaia.countrieswithcompose.R
 import com.panasetskaia.countrieswithcompose.domain.Country
 import com.panasetskaia.countrieswithcompose.ui.utils.SnackbarDelegate
+import com.panasetskaia.countrieswithcompose.ui.utils.SnackbarState
 
 @Composable
 fun FavouritesScreen(
@@ -30,6 +32,7 @@ fun FavouritesScreen(
     onBackPressed: () -> Unit,
     onCountryClickListener: (Country) -> Unit
 ) {
+    val context = LocalContext.current
     val viewModel: FavouritesViewModel = viewModel(factory = viewModelFactory)
     val lifecycleOwner = LocalLifecycleOwner.current
     val countriesFlow = remember(viewModel.favouritesFlow, lifecycleOwner) {
@@ -64,7 +67,14 @@ fun FavouritesScreen(
                 },
                 actions = {
                     if (showSelection) {
-                        IconButton(onClick = { viewModel.deleteSelectedFromFavourites() }) {
+                        IconButton(onClick = {
+                            viewModel.deleteSelectedFromFavourites()
+                            snackbarDelegate.showSnackbar(
+                                SnackbarState.DEFAULT,
+                                context.getString(R.string.deleted)
+                            )
+                            viewModel.toggleSelectionForTheList()
+                        }) {
                             Icon(
                                 painter = painterResource(id = R.drawable.ic_baseline_delete_24),
                                 contentDescription = stringResource(id = R.string.deleteFromFav)
