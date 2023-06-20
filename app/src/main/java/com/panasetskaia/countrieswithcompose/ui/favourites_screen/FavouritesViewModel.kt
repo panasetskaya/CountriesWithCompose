@@ -6,7 +6,6 @@ import androidx.lifecycle.viewModelScope
 import com.panasetskaia.countrieswithcompose.domain.ChangeFavouriteStatusUseCase
 import com.panasetskaia.countrieswithcompose.domain.Country
 import com.panasetskaia.countrieswithcompose.domain.GetAllFavouritesUseCase
-import com.panasetskaia.countrieswithcompose.domain.NetworkResult
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -20,7 +19,7 @@ class FavouritesViewModel @Inject constructor(
     private val getAllFavouritesUseCase: GetAllFavouritesUseCase
 ): ViewModel() {
 
-    val innerCash = mutableStateListOf<Country>()
+    private val innerCash = mutableStateListOf<Country>()
 
     private val _favouritesFlow =
         MutableSharedFlow<List<Country>>(
@@ -81,17 +80,6 @@ class FavouritesViewModel @Inject constructor(
             }
             _favouritesFlow.emit(innerCash)
         }
-
-
-
-//        val item = myItems[index]
-//        val isSelected = item.isSelected
-//
-//        if (isSelected) {
-//            myItems[index] = item.copy(isSelected = false)
-//        } else {
-//            myItems[index] = item.copy(isSelected = true)
-//        }
     }
 
 }
