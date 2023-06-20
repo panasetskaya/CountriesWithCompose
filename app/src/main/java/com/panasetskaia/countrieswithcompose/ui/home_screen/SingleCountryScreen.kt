@@ -7,12 +7,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.lifecycle.ViewModelProvider
 import com.panasetskaia.countrieswithcompose.R
 import com.panasetskaia.countrieswithcompose.domain.Country
 
 @Composable
 fun SingleCountryScreen(
-    viewModel: HomeScreenViewModel,
+    viewModelFactory: ViewModelProvider.Factory,
     onBackPressed: () -> Unit
 ) {
 

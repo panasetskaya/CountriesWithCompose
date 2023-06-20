@@ -2,7 +2,7 @@ package com.panasetskaia.countrieswithcompose.di.viewmodel
 
 import androidx.lifecycle.ViewModel
 import com.panasetskaia.countrieswithcompose.ui.favourites_screen.FavouritesViewModel
-import com.panasetskaia.countrieswithcompose.ui.home_screen.HomeScreenViewModel
+import com.panasetskaia.countrieswithcompose.ui.home_screen.AllCountriesViewModel
 
 import dagger.Binds
 import dagger.Module
@@ -13,8 +13,8 @@ interface ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(HomeScreenViewModel::class)
-    fun bindHomeScreenViewModel(impl: HomeScreenViewModel): ViewModel
+    @ViewModelKey(AllCountriesViewModel::class)
+    fun bindHomeScreenViewModel(impl: AllCountriesViewModel): ViewModel
 
     @Binds
     @IntoMap

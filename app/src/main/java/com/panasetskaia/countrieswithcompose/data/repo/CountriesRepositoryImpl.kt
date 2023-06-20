@@ -38,10 +38,11 @@ class CountriesRepositoryImpl @Inject constructor(
                     }
                 } ?: Log.e("MYLOG", "Null common name for dto: $countryDto")
             }
+            _errorStatus.emit(NetworkResult.success())
             return getCountriesFromDB()
         } catch (e: Exception) {
             Log.e("MYLOG", e.message.toString())
-            _errorStatus.tryEmit(createErrorResult(e))
+            _errorStatus.emit(createErrorResult(e))
             return getCountriesFromDB()
         }
     }

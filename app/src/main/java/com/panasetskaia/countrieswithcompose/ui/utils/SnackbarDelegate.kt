@@ -1,12 +1,13 @@
 package com.panasetskaia.countrieswithcompose.ui.utils
 
+import android.content.Context
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.SnackbarDefaults
 import androidx.compose.material.SnackbarDuration
 import androidx.compose.material.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-import com.panasetskaia.countrieswithcompose.ui.theme.DarkerGray
+import com.panasetskaia.countrieswithcompose.R
+import com.panasetskaia.countrieswithcompose.domain.NetworkResult
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -47,4 +48,16 @@ class SnackbarDelegate(
             snackbarHostState?.showSnackbar(message, actionLabel, duration)
         }
     }
+}
+
+internal fun showSnackBarWithError(
+    snackbarService: SnackbarDelegate,
+    networkResult: NetworkResult,
+    context: Context
+) {
+    val msg = networkResult.msg ?: context.getString(R.string.smth_wrong)
+    snackbarService.showSnackbar(
+        SnackbarState.ERROR,
+        msg
+    )
 }

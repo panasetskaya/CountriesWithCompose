@@ -3,10 +3,8 @@ package com.panasetskaia.countrieswithcompose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.lifecycle.ViewModelProvider
 import com.panasetskaia.countrieswithcompose.application.CountriesWithComposeApp
 import com.panasetskaia.countrieswithcompose.di.viewmodel.ViewModelFactory
-import com.panasetskaia.countrieswithcompose.ui.home_screen.HomeScreenViewModel
 import com.panasetskaia.countrieswithcompose.ui.main_screen.MainScreen
 import com.panasetskaia.countrieswithcompose.ui.theme.CountriesWithComposeTheme
 import javax.inject.Inject
