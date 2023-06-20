@@ -1,17 +1,20 @@
 package com.panasetskaia.countrieswithcompose.ui.main_screen
 
 import android.content.Context
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
-import androidx.lifecycle.Lifecycle
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.panasetskaia.countrieswithcompose.R
 import com.panasetskaia.countrieswithcompose.domain.NetworkResult
 import com.panasetskaia.countrieswithcompose.domain.Status
 import com.panasetskaia.countrieswithcompose.navigation.AppNavGraph
@@ -23,7 +26,6 @@ import com.panasetskaia.countrieswithcompose.ui.home_screen.HomeScreenViewModel
 import com.panasetskaia.countrieswithcompose.ui.home_screen.SingleCountryScreen
 import com.panasetskaia.countrieswithcompose.ui.utils.SnackbarDelegate
 import com.panasetskaia.countrieswithcompose.ui.utils.SnackbarState
-import com.panasetskaia.countrieswithcompose.R
 import kotlinx.coroutines.launch
 
 @Composable
@@ -35,8 +37,10 @@ fun MainScreen(viewModelFactory: ViewModelProvider.Factory) {
     val homeScreenViewModel: HomeScreenViewModel = viewModel(factory = viewModelFactory)
     val scaffoldState: ScaffoldState = rememberScaffoldState()
     val snackbarDelegate: SnackbarDelegate by lazy {
-        SnackbarDelegate(snackbarHostState = scaffoldState.snackbarHostState,
-                coroutineScope = scope)
+        SnackbarDelegate(
+            snackbarHostState = scaffoldState.snackbarHostState,
+            coroutineScope = scope
+        )
     }
 //    val loadingStatusFlow = remember(homeScreenViewModel.loadingStatusFlow, lifecycleOwner) {
 //        homeScreenViewModel.loadingStatusFlow.flowWithLifecycle(
@@ -49,7 +53,7 @@ fun MainScreen(viewModelFactory: ViewModelProvider.Factory) {
     LaunchedEffect(key1 = null) {
         launch {
             homeScreenViewModel.loadingStatusFlow.collect {
-                handleNetworkResult(snackbarDelegate,it, context)
+                handleNetworkResult(snackbarDelegate, it, context)
             }
         }
     }
@@ -85,9 +89,17 @@ fun MainScreen(viewModelFactory: ViewModelProvider.Factory) {
         },
         scaffoldState = scaffoldState,
         snackbarHost = { snackbarHostState ->
-            SnackbarHost(hostState = snackbarHostState) {
+            SnackbarHost(
+                hostState = snackbarHostState
+            ) {
                 val backgroundColor = snackbarDelegate.snackbarBackgroundColor
-                Snackbar(snackbarData = it, backgroundColor = backgroundColor)
+                val contentColor = snackbarDelegate.snackbarContentColor
+                Snackbar(
+                    snackbarData = it,
+                    backgroundColor = backgroundColor,
+                    contentColor = contentColor,
+                    shape = RoundedCornerShape(16.dp)
+                )
             }
         }
     ) { paddingValues ->
@@ -106,7 +118,7 @@ fun MainScreen(viewModelFactory: ViewModelProvider.Factory) {
                 FavouritesScreen(
                     viewModelFactory,
                     snackbarDelegate,
-                    {navigationState.navHostController.popBackStack()}
+                    { navigationState.navHostController.popBackStack() }
                 ) {
                     navigationState.navigateToSingleCountry()
                 }
@@ -121,7 +133,11 @@ fun MainScreen(viewModelFactory: ViewModelProvider.Factory) {
 }
 
 
-internal fun handleNetworkResult(snackbarService: SnackbarDelegate, networkResult: NetworkResult, context: Context) {
+internal fun handleNetworkResult(
+    snackbarService: SnackbarDelegate,
+    networkResult: NetworkResult,
+    context: Context
+) {
     when (networkResult.status) {
         Status.SUCCESS -> {}
         Status.LOADING -> {

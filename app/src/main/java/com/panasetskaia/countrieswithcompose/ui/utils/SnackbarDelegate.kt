@@ -1,10 +1,12 @@
 package com.panasetskaia.countrieswithcompose.ui.utils
 
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.SnackbarDefaults
 import androidx.compose.material.SnackbarDuration
 import androidx.compose.material.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+import com.panasetskaia.countrieswithcompose.ui.theme.DarkerGray
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -23,9 +25,16 @@ class SnackbarDelegate(
     val snackbarBackgroundColor: Color
         @Composable
         get() = when (snackbarState) {
-            SnackbarState.DEFAULT -> SnackbarDefaults.backgroundColor
+            SnackbarState.DEFAULT -> MaterialTheme.colors.secondary
             SnackbarState.ERROR -> Color.Red
         }
+
+    val snackbarContentColor: Color
+    @Composable
+    get() = when (snackbarState) {
+        SnackbarState.DEFAULT -> Color.White
+        SnackbarState.ERROR -> Color.White
+    }
 
     fun showSnackbar(
         state: SnackbarState,
